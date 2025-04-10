@@ -32,8 +32,6 @@ const ChatPlaceCategory2 = memo(function ChatHistory(props) {
             setMessages ([ { text: props.userMessage, response: true }]);
             return;
         }
-
-
     }, []);
 
     const handleAsk = async (question) => {

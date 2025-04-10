@@ -30,7 +30,7 @@ function App({ place, curso}) {
                 name="questionTextArea"
                 placeholder="Escribe tu pregunta aqui..."
                 ref={textAreaRef}></textarea>
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit}>Enviar</button>
         </div>
     );
 }
