@@ -1,0 +1,132 @@
+import React, { useEffect, useState, useRef } from "react";
+import { rootApi } from "../api/apiRoot";
+import MenuRoot2 from "../menu2/MenuRoot2";
+import MenuRoot3 from "../menu3/MenuRoot3";
+import ChatPlaceCategory from "../chat-place/ChatPlaceCategory";
+
+const App = () => {
+    const [selectedOption, setSelectedOption] = useState(999);
+    const [loading, setLoading] = useState(false);
+    const [menuOptions, setMenuOptions] = useState([
+        { id: "option1", name: "Loading ..." }
+    ]);
+    const [plantelSelected, setPlantelSelected] = useState({});
+    const hasFetched = useRef(false); // Track first render
+    const [curso, setCurso] = useState(777);
+
+    useEffect(() => {
+        if (hasFetched.current) return; // Prevent second execution
+        hasFetched.current = true;
+
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                console.log("Calling places API...");
+                const data = await rootApi();
+                console.log('DATA RESPONSE: {}', data);
+                if (data && Array.isArray(data)) {
+                    const options = data.map((place) => ({
+                        id: place.id.toString(),
+                        name: place.name
+                    }));
+                    // Remove the object where 'name' or 'description' contains 'GENERAL'
+                    const filteredData = data.filter(item => !item.name.includes('GENERAL') && !item.description.includes('GENERAL'));
+
+                    console.log('filteredData: {}', filteredData);
+                    setMenuOptions(filteredData);
+                }
+            } catch (err) {
+                console.error("Failed to fetch places:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        if (curso===777) return;
+        setSelectedOption(777)
+    }, [curso]);
+
+    return (
+        <div style={styles.container}>
+            {selectedOption === 999 ? (
+                <div style={styles.menu}>
+                    <h2>Elige tu plantel favorito</h2>
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        menuOptions.map((option, index) => (
+                            <button
+                                key={index}
+                                style={styles.button}
+                                onClick={() =>{
+                                    setSelectedOption(888);
+                                    setPlantelSelected(index);
+                            }}
+                            >
+                                {option.name}
+                            </button>
+                        ))
+                    )}
+                </div>
+            ) : selectedOption === 888?(
+                <div style={styles.option}>
+                    <MenuRoot2 place={menuOptions[plantelSelected]} curso={curso} setCurso={setCurso}></MenuRoot2>
+                    <button style={styles.button} onClick={() => {
+                        setSelectedOption(999)
+                        setCurso(777);
+                    }}>
+                        Regresar Menu Anterior
+                    </button>
+                </div>
+            ): selectedOption === 777 ?(
+                <div style={styles.option}>
+                    <MenuRoot3 place={menuOptions[plantelSelected]} curso={curso}></MenuRoot3>
+                    <button style={styles.button} onClick={() => {
+                        setSelectedOption(888);
+                        setCurso(777);
+                    }}>
+                        Regresar Menu Anterior
+                    </button>
+                    <button style={styles.button} onClick={() => {
+                        /*setSelectedOption(888);
+                        setCurso(777);*/
+                        setSelectedOption(666);
+                    }}>
+                        Preguntas frecuentes
+                    </button>
+                </div>
+            ): (
+                <div style={styles.option}>
+                   <ChatPlaceCategory place={menuOptions[plantelSelected]} curso={curso}></ChatPlaceCategory>
+                    <button style={styles.button} onClick={() => {
+                        setSelectedOption(777);
+                    }}>
+                        Regresar Menu Anterior
+                    </button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+const styles = {
+    container: { textAlign: "center", padding: "20px" },
+    menu: { marginTop: "1px" },
+    option: { marginTop: "1px" },
+    button: {
+        margin: "10px",
+        padding: "10px 20px",
+        fontSize: "16px",
+        cursor: "pointer",
+        borderRadius: "5px",
+        border: "1px solid black",
+        backgroundColor: "#007bff",
+        color: "#fff"
+    },
+};
+
+export default App;

@@ -1,0 +1,12 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "places",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "categories.id", "order": "ASCENDING" },
+        { "fieldPath": "categories.name", "order": "ASCENDING" }
+      ]
+    }
+  ]
+}
