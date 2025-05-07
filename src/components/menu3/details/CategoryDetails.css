@@ -1,0 +1,26 @@
+.category-details-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    max-width: 400px;
+    margin: 5px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .category-details-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .category-details-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .category-details-card p strong {
+    color: #000;
+  }

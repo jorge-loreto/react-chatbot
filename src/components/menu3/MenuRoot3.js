@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import CategoryDetails from "./details/CategoryDetails";
 
 const CursoCard = ({ place, curso }) => {
     // Validación para evitar errores si no hay datos
@@ -36,13 +37,13 @@ const CursoCard = ({ place, curso }) => {
             {/* Información del curso */}
             <div style={styles.courseContainer}>
                 <h3 style={styles.courseTitle}>{course.name}</h3>
-                <p style={styles.description}>{course.description}</p>
                 <img
                     src={courseImage}
                     alt="Course"
                     style={styles.image}
                 />
             </div>
+            <CategoryDetails categoryDetails={course.categoryDetails} />
         </div>
     );
 };

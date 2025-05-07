@@ -3,6 +3,9 @@ import { rootApi } from "../api/apiRoot";
 import MenuRoot2 from "../menu2/MenuRoot2";
 import MenuRoot3 from "../menu3/MenuRoot3";
 import ChatPlaceCategory from "../chat-place/ChatPlaceCategory";
+import FortuneWheel from '../rueda/FortuneWheel';
+import GenerateCode from "../utils/GenerateCode";
+
 
 const App = () => {
     const [selectedOption, setSelectedOption] = useState(999);
@@ -13,6 +16,19 @@ const App = () => {
     const [plantelSelected, setPlantelSelected] = useState({});
     const hasFetched = useRef(false); // Track first render
     const [curso, setCurso] = useState(777);
+    const premioRef = useRef({
+        nombre: '',
+        email: '',
+        celular: '',
+        id : '',
+        category: '',
+        plantel: '',
+        premio: '',
+        fecha: '',
+        valido: '',
+        fechaInicio:'',
+        horario:''
+      });
 
     useEffect(() => {
         if (hasFetched.current) return; // Prevent second execution
@@ -74,23 +90,25 @@ const App = () => {
                 </div>
             ) : selectedOption === 888?(
                 <div style={styles.option}>
-                    <MenuRoot2 place={menuOptions[plantelSelected]} curso={curso} setCurso={setCurso}></MenuRoot2>
-                    <button style={styles.button} onClick={() => {
+                    <button style={styles.button2} onClick={() => {
                         setSelectedOption(999)
                         setCurso(777);
                     }}>
                         Regresar Menu Anterior
                     </button>
+                    <MenuRoot2 place={menuOptions[plantelSelected]} curso={curso} setCurso={setCurso}></MenuRoot2>
                 </div>
             ): selectedOption === 777 ?(
                 <div style={styles.option}>
-                    <MenuRoot3 place={menuOptions[plantelSelected]} curso={curso}></MenuRoot3>
                     <button style={styles.button} onClick={() => {
                         setSelectedOption(888);
                         setCurso(777);
                     }}>
                         Regresar Menu Anterior
                     </button>
+
+                    <MenuRoot3 place={menuOptions[plantelSelected]} curso={curso}></MenuRoot3>
+                    
                     <button style={styles.button} onClick={() => {
                         /*setSelectedOption(888);
                         setCurso(777);*/
@@ -98,15 +116,48 @@ const App = () => {
                     }}>
                         Preguntas frecuentes
                     </button>
+                    <button style={styles.button} onClick={() => {
+                        /*setSelectedOption(888);
+                        setCurso(777);*/
+                        setSelectedOption(555);
+                    }}>
+                        🎁 ¡Gira y gana!
+                    </button>
                 </div>
-            ): (
+            
+            ): selectedOption === 555 ? (
                 <div style={styles.option}>
-                   <ChatPlaceCategory place={menuOptions[plantelSelected]} curso={curso}></ChatPlaceCategory>
                     <button style={styles.button} onClick={() => {
                         setSelectedOption(777);
                     }}>
                         Regresar Menu Anterior
                     </button>
+                    <FortuneWheel 
+                        place={menuOptions[plantelSelected]} 
+                        curso={curso} 
+                        setSelectedOption={setSelectedOption}
+                        premioRef={premioRef}
+                        />
+                </div>
+            ): selectedOption === 444 ? (
+                <div style={styles.option}>
+                    <button style={styles.button} onClick={() => {
+                        setSelectedOption(777);
+                    }}>
+                        Regresar Menu Anterior
+                    </button>
+                    <GenerateCode data={premioRef.current}></GenerateCode>
+                   
+                </div>
+            ): 
+            (
+                <div style={styles.option}>
+                    <button style={styles.button} onClick={() => {
+                        setSelectedOption(777);
+                    }}>
+                        Regresar Menu Anterior
+                    </button>
+                   <ChatPlaceCategory place={menuOptions[plantelSelected]} curso={curso}></ChatPlaceCategory>
                 </div>
             )}
         </div>
@@ -126,6 +177,17 @@ const styles = {
         border: "1px solid black",
         backgroundColor: "#007bff",
         color: "#fff"
+    },
+    button2: {
+        margin: "10px",
+        padding: "10px 5px",
+        fontSize: "16px",
+        cursor: "pointer",
+        borderRadius: "5px",
+        border: "1px solid black",
+        backgroundColor: "#007bff",
+        color: "#fff",
+        textAlign: "left"
     },
 };
 

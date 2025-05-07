@@ -1,0 +1,70 @@
+.contenedor-rueda {
+    position: relative;
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .rueda {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 10px solid #f472b6;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .segmento {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 50%;
+    transform-origin: 0% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    overflow: hidden;
+  }
+  
+  .segmento span {
+    transform: rotate(-60deg);
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    width: 100px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  
+  
+  .puntero {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
+  
+  .boton-girar {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(to right, #ec4899, #facc15);
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .resultado {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: green;
+    font-weight: bold;
+  }
+  
