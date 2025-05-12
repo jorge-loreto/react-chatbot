@@ -2,14 +2,18 @@ import { formatDate } from "../utils/utils"; // Import the function
 
 const PlaceCard = ({ place, curso, setCurso }) => {
 
-    const isStartDateValid = (startDate) => {
+    const isStartDateValid = (startDate, admision) => {
         const now = new Date(); // Current date and time
         const start = new Date(startDate); // Convert startDate string to Date object
-        return start > now; // Check if startDate is greater than now
+        let esValido =  start > now; // Check if startDate is greater than now
+        if(esValido === false && admision === true) {
+            esValido = true;
+        }
+        return esValido; // Return true if valid, false otherwise
       };
 
       
-      const getStartDateMessage = (startDate) => {
+      const getStartDateMessage = (startDate, admision) => {
 
         console.log('startDate: {}', startDate);
         const start = new Date(startDate);
@@ -21,7 +25,10 @@ const PlaceCard = ({ place, curso, setCurso }) => {
         }
         const now = new Date();
         if (start > now) {
-            return formatDate(startDate); // Format the date using the imported function
+            return "Inicia el: "+formatDate(startDate); // Format the date using the imported function
+        }
+        if( admision) {
+            return "Curso ya iniciado pero con lugares disponibles";
         }
         return "Sin fecha disponible";
       };
@@ -38,9 +45,10 @@ const PlaceCard = ({ place, curso, setCurso }) => {
                     <h3>Cursos disponibles:</h3>
                     <div style={styles.buttonContainer}>
                         {place.categories.map((category, index) => {
-                            const isValid = isStartDateValid(category.categoryDetails.startDate);
-                            const startDateMessage = getStartDateMessage(category.categoryDetails.startDate);
+                            const isValid = isStartDateValid(category.categoryDetails.startDate, category.categoryDetails.admision);
+                            const startDateMessage = getStartDateMessage(category.categoryDetails.startDate, category.categoryDetails.admision);
                            
+                            
                             return (
                                 <div key={index} style={{ marginBottom: "20px" }}>
 
@@ -58,7 +66,7 @@ const PlaceCard = ({ place, curso, setCurso }) => {
 
                                 </button>
                                 <p style={{ marginTop: "10px", color: isValid ? "green" : "red" }}>
-                                    {isValid ? `Inicia el: ${startDateMessage}` : startDateMessage}
+                                    {startDateMessage}
                                 </p>
                                 </div>
                             );

@@ -3,6 +3,7 @@
 //const API_BASE_URL = "https://34.51.36.4:5000";
 //const API_BASE_URL ="https://my-iteci-app-1095159323845.us-central1.run.app"
 import axios from "axios";
+import { premioTranslation } from "../utils/utils"; // Adjust the import path as necessary
 
 const API_BASE_URL =process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
 
@@ -13,6 +14,12 @@ const apiReferidos = axios.create({
     },
     withCredentials: true
 });
+
+const obtenerFechaActual = () => {
+    const fecha = new Date();
+    return fecha.toLocaleString(); // Formato local con fecha y hora
+  };
+  
 
 // Function to send a question in the request body
 export const askRefer = async (referido) => {
@@ -25,10 +32,12 @@ export const askRefer = async (referido) => {
             plantel: referido.plantel, // Ya tienes estos valores listos
             category: referido.category, // Ya tienes estos valores listos
             fechaInicio: referido.fechaInicio,
-            premio: referido.premio,
-            fecha: referido.fecha,
-            valido: referido.valido,
-            horario: referido.horario
+            premio: premioTranslation(referido.premio),
+            direccion: referido.direccion,
+            fecha: obtenerFechaActual(),
+            validez: referido.valido,
+            horario: referido.horario,
+            inscripcion: referido.inscripcion,
         };
         console.error("Invoking API referido :", referido);
         const response = await apiReferidos.post("/referidos/referido", { payload });

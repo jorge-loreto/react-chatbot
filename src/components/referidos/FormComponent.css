@@ -1,0 +1,42 @@
+.form-wrapper {
+    margin-top: 20px;
+  }
+  
+  .form-table {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 10px;
+  }
+  
+  .form-table td {
+    padding: 5px;
+    vertical-align: middle;
+  }
+  
+  .form-table label {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 120px;
+  }
+  
+  .form-table input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-table button {
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form-table button:hover {
+    background-color: #004d99;
+  }
+  

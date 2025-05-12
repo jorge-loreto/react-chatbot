@@ -6,7 +6,7 @@ function App() {
         <div className="chat-header">
             <img src={logoIteci} alt="Chat Logo"/>
             <h2>Chat Iteci v1.3</h2>
-            <p className="small-text">07 Abril 2025</p>
+            <p className="small-text">10 Mayo 2025</p>
         </div>
     );
 }

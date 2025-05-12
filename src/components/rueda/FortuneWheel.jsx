@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { formatDateSpanish, formatDate } from "../utils/utils"; // Adjust the import path as necessary
+import { premioTranslation, formatDate } from "../utils/utils"; // Adjust the import path as necessary
 import { askRefer } from "../api/apiReferidos"; // Import API function
 
 const premios = [
-  { texto: '50% inscripcion', color: '#F87171' },
-//  { texto: '60% Inscripcion', color: '#FBBF24' },
-  { texto: '40% Inscripcion', color: '#34D399' },
-  { texto: '30% inscripcion!', color: '#F472B6' }
+  { texto: 'Sorpresa 1', color: '#F87171' },
+  { texto: 'Sorpresa 2', color: '#34D399' },
+  { texto: 'Sorpresa 3', color: '#F472B6' },
+  { texto: 'Sorpresa 4', color: '#ec4899' },
+  { texto: 'Sorpresa 5', color: '#facc15' }
 ];
 
 const RADIUS = 150;
@@ -32,6 +33,9 @@ function polarToCartesian(cx, cy, r, angleInDegrees) {
     y: cy + r * Math.sin(angleInRadians),
   };
 }
+
+
+
 
 export default function FortuneWheel({ place, curso, setSelectedOption, premioRef}) {
   const course = place?.categories[curso];
@@ -191,7 +195,7 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
             fontWeight: 'bold',
           }}
         >
-          🎁 Ganaste: {winner}
+          🎁 Ganaste: {premioTranslation(winner)}
         </div>
       )}
     </div>):
@@ -199,7 +203,7 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
       <div style={styles.overlay}>
         <div style={styles.modal}>
           <h2>Bienvenido a Grupo iTECi🎉 ¡Felicidades!🎉 </h2>
-          <p>🎉 Ganaste: <span style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'blue' }}>{winner}</span></p>
+          <p>🎉 Ganaste: <span style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'blue' }}>{premioTranslation(winner)}</span></p>
           <p>Para el curso de : <span style={{ fontWeight: 'bold', fontSize: '1em', color: 'red' }}>{course.name.toUpperCase()}</span></p>
           
           
@@ -211,19 +215,12 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
           <p>Plantel : <span style={{ fontWeight: 'bold', fontSize: '1em', color: 'red' }}>{place.name}</span></p>
           
           <p>Horario : <span style={{ fontWeight: 'bold', fontSize: '.8em', color: 'blue' }}>{course.categoryDetails.horario}</span></p>
-          <p>Déjanos tus datos para recibir tu premio:</p>
-    
+              
           <form onSubmit={(e) => {
             e.preventDefault();
-            const data = new FormData(e.target);
-            const nombre = data.get("nombre");
-            const correo = data.get("correo");
-            const celular = data.get("celular");
-            console.log({ nombre, correo });
+          
             setShowModal(false);
-            premioRef.current.nombre = nombre;
-            premioRef.current.email = correo;
-            premioRef.current.celular = celular;
+        
             premioRef.current.premio = winner;
             premioRef.current.fecha = new Date().toLocaleDateString('es-MX');
             const hoy = new Date();
@@ -235,15 +232,13 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
             premioRef.current.id = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
             premioRef.current.fechaInicio = course.categoryDetails.startDate;
             premioRef.current.horario = course.categoryDetails.horario;
+            premioRef.current.inscripcion = course.categoryDetails.costoInscripcion;
            
             
             handleBack();
           }}>
-            <input name="nombre" placeholder="Tu nombre" required style={styles.input} />
-            <input name="correo" type="email" placeholder="Tu correo" required style={styles.input} />
-            <input name="celular" placeholder="Tu numero celular" required style={styles.input} />
              
-            <button type="submit" style={styles.button}>Enviar</button>
+            <button type="submit" style={styles.button}>Descargar premio</button>
             
            
             <button type="button" onClick={() => setShowModal(false)} style={styles.button}>Cancelar</button>

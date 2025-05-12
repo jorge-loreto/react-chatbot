@@ -1,23 +1,55 @@
-import React, { useEffect  } from 'react';
+import React, { useEffect, useRef } from 'react';
 import logo from '../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
 import logoOxxo from '../../assets/Oxxo_Logo.svg.webp'; // Adjust the path to your logo image
 import TicketDetails from '../TICKET/CourseDetails';
-import { formatDateSpanish, formatDate } from "../utils/utils"; // Adjust the import path as necessary
+import { formatDateSpanish, premioTranslation } from "../utils/utils"; // Adjust the import path as necessary
 import { askRefer } from "../api/apiReferidos"; // Import API function
 
 const GenerateCode = ({data}) => {
 
-  const firstTwoChars = "0."+data.premio.substring(0, 2);
-
-  const totalDeposito = 1000*(1-(parseFloat(firstTwoChars)));
+  const definirPorcentaje = (option) => {
   
+    console.log('Option selected random code: {} ...', option);
+    if(option==='Sorpresa 1'){
+      return 0.3;
+    }
+    if(option==='Sorpresa 2'){
+      return 0.4;
+    }
+    if(option==='Sorpresa 3'){
+      return 0.5;
+    }
+    if(option==='Sorpresa 4'){
+      return 0.6;
+    }
+    if(option==='Sorpresa 5'){
+      return 0.7;
+    }
+    
+    return 0.5;
+  };
+
+  console.log('GenerateCode: received data {}', data); // "0.3"
+  // const firstTwoChars = "0."+data.premio.substring(0, 2);
+  const firstTwoChars = definirPorcentaje(data.premio);
+  console.log('firstTwoChars: {}', firstTwoChars); // "0.3"
+
+  const totalDeposito = parseFloat(data.inscripcion*(1-(parseFloat(firstTwoChars))));
+  const hasRun = useRef(false);
+
 
   useEffect(() => {
-    // Trigger the click logic after the component has mounted
-    generateRandomCode2();
+    if (!hasRun.current) {
+      generateRandomCode2();
+      hasRun.current = true; // Prevents re-execution
+    }
   }, []);
+  
 
   
+  function formatFloat(num) {
+    return parseFloat(num.toFixed(2)); 
+  }
   
 
   const generateRandomCode = () => {
@@ -37,14 +69,6 @@ const GenerateCode = ({data}) => {
       const el2 = document.getElementById("main-container");
       el2.style.display = "none"; // hide again
     });
-/*
-    askRefer(data).then((res) => {
-        console.log(res);
-        alert('Premio enviado correctamente!');
-      }).catch((err) => {
-        console.log(err);
-        alert('Error al enviar el premio, por favor intenta de nuevo.');
-      });*/
   
   };
 
@@ -63,13 +87,14 @@ const GenerateCode = ({data}) => {
 
     askRefer(data).then((res) => {
         console.log(res);
-        alert('Premio enviado correctamente!');
       }).catch((err) => {
         console.log(err);
         alert('Error al enviar el premio, por favor intenta de nuevo.');
       });
   
   };
+
+  
 
   return (
   <div id="main-container">
@@ -102,7 +127,7 @@ const GenerateCode = ({data}) => {
 
   <h3 style={{ margin: '5px 0' }}>🎉 Por promoción tienes un descuento de:</h3>
   <h3 style={{ margin: '5px 0',fontSize: '40px', fontWeight: 'bold', color: '#d32f2f' }}>
-    {data.premio} 
+    {premioTranslation(data.premio)}
   </h3>
   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
     <h4 style={{ marginBottom: '0px' }}>VALIDO HASTA:</h4>
@@ -119,7 +144,7 @@ const GenerateCode = ({data}) => {
       alt="OXXO Logo"
       style={{ width: '50px', height: '26px', margin: '5px 0' }}
     />  <h3 style={{ margin: '5px 0' }}>💵 Deposita en un OXXO:</h3>  <h1 style={{ margin: '5px 0', fontStyle: 'italic', color: '#4169E1' }}>
-      ${totalDeposito} </h1>
+      ${formatFloat(totalDeposito)} </h1>
   </div>
   <h4>a la cuenta: <strong style={{  color: '#4169E1' }}>4152-3144-0002-3704</strong>  BBVA Bancomer o en tu plantel  </h4>
   

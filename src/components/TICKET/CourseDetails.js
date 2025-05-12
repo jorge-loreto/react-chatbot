@@ -22,8 +22,8 @@ const CourseDetails = ({ data }) => {
             <td style={{ padding: "10px", border: "1px solid #ddd" }}>{data.plantel}</td>
           </tr>
           <tr>
-            <td style={{ padding: "10px", border: "1px solid #ddd" }}>📧 Email</td>
-            <td style={{ padding: "10px", border: "1px solid #ddd" }}>{data.email}</td>
+            <td style={{ padding: "10px", border: "1px solid #ddd" }}>📧 Direccion</td>
+            <td style={{ padding: "10px", border: "1px solid #ddd" }}>{data.direccion}</td>
           </tr>
           <tr>
             <td style={{ padding: "10px", border: "1px solid #ddd" }}>📱 Celular</td>

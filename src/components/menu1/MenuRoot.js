@@ -5,6 +5,7 @@ import MenuRoot3 from "../menu3/MenuRoot3";
 import ChatPlaceCategory from "../chat-place/ChatPlaceCategory";
 import FortuneWheel from '../rueda/FortuneWheel';
 import GenerateCode from "../utils/GenerateCode";
+import FormComponent from "../referidos/FormComponent";
 
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
     const [curso, setCurso] = useState(777);
     const premioRef = useRef({
         nombre: '',
-        email: '',
+        direccion: '',
         celular: '',
         id : '',
         category: '',
@@ -27,10 +28,11 @@ const App = () => {
         fecha: '',
         valido: '',
         fechaInicio:'',
-        horario:''
+        horario:'',
+        inscripcion: 0
       });
 
-    useEffect(() => {
+     useEffect(() => {
         if (hasFetched.current) return; // Prevent second execution
         hasFetched.current = true;
 
@@ -119,7 +121,7 @@ const App = () => {
                     <button style={styles.button} onClick={() => {
                         /*setSelectedOption(888);
                         setCurso(777);*/
-                        setSelectedOption(555);
+                        setSelectedOption(1001);//llama a REFERIDO
                     }}>
                         🎁 ¡Gira y gana!
                     </button>
@@ -147,6 +149,18 @@ const App = () => {
                         Regresar Menu Anterior
                     </button>
                     <GenerateCode data={premioRef.current}></GenerateCode>
+                   
+                </div>
+            ): selectedOption === 1001 ? (
+                <div style={styles.option}>
+                    <button style={styles.button} onClick={() => {
+                        setSelectedOption(777);
+                    }}>
+                        Regresar Menu Anterior
+                    </button>
+                    <FormComponent 
+                        setSelectedOption={setSelectedOption}
+                        premioRef={premioRef}/>
                    
                 </div>
             ): 

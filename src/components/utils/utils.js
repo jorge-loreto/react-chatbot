@@ -35,3 +35,24 @@ export const formatDateSpanish = (dateString) => {//
   // Return the formatted string
   return `${day} ${monthName} ${year}`;
 };
+
+export const premioTranslation = (optionSelected) =>{
+  console.log('Option selected random code: {} ...', optionSelected);
+    if(optionSelected==='Sorpresa 1'){
+      return "30% inscripcion";
+    }
+    if(optionSelected==='Sorpresa 2'){
+      return "40% inscripcion";
+    }
+    if(optionSelected==='Sorpresa 3'){
+      return "50% inscripcion";
+    }
+    if(optionSelected==='Sorpresa 4'){
+      return "60% inscripcion";
+    }
+    if(optionSelected==='Sorpresa 5'){
+      return "70% inscripcion";
+    }
+    
+    return "50% en inscripcion";
+};
