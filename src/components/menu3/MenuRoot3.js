@@ -63,6 +63,7 @@ const styles = {
         fontSize: "24px",
         marginBottom: "1px",
         color: "#333",
+         marginTop: "0px",
     },
     info: {
         fontSize: "14px",
@@ -94,6 +95,13 @@ const styles = {
         color: "red",
         fontSize: "14px",
         textAlign: "center",
+    },
+     h2: {
+        marginTop: "0px",
+        marginBottom: "0px",
+        marginLeft: "0px",
+        marginRight: "0px",
+        padding: "0px 0px",
     },
 };
 

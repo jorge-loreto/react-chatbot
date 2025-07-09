@@ -17,6 +17,7 @@
     font-weight: bold;
     display: inline-block;
     min-width: 120px;
+    background-color: #78e420;
   }
   
   .form-table input {
@@ -39,4 +40,23 @@
   .form-table button:hover {
     background-color: #004d99;
   }
+
+  .form-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    
+    color: #0f0101;
+    font-weight: bold;
+    
+    background-color: #78e420;
+  }
+  .roulette-background {
+      width: 500px;
+      height: 500px;
+      background-size: cover; /* or 'contain' if you want the full image visible */
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 2px solid #000;
+    }
   

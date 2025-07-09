@@ -48,10 +48,10 @@ export const premioTranslation = (optionSelected) =>{
       return "50% inscripcion";
     }
     if(optionSelected==='Sorpresa 4'){
-      return "60% inscripcion";
+      return "20% inscripcion";
     }
     if(optionSelected==='Sorpresa 5'){
-      return "70% inscripcion";
+      return "10% inscripcion";
     }
     
     return "50% en inscripcion";

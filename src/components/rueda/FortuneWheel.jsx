@@ -233,14 +233,14 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
             premioRef.current.fechaInicio = course.categoryDetails.startDate;
             premioRef.current.horario = course.categoryDetails.horario;
             premioRef.current.inscripcion = course.categoryDetails.costoInscripcion;
+            premioRef.current.telefonoEscuela = place.phone;
+            premioRef.current.tarjetaBancomer = place.tarjetaBancomer;
            
             
             handleBack();
           }}>
              
-            <button type="submit" style={styles.button}>Descargar premio</button>
-            
-           
+            <button type="submit" style={styles.button}>Descargar premio</button>           
             <button type="button" onClick={() => setShowModal(false)} style={styles.button}>Cancelar</button>
           </form>
         </div>

@@ -8,6 +8,15 @@
   
   .info {
     margin-top: 20px;
-    color: #888;
+    color: #0f0101;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: #78e420;
+  }
+  .p {
+    margin-top: 20px;
+    color: #f70808;
+    font-size: 1rem;
+    line-height: 1.5;
   }
   

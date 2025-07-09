@@ -20,10 +20,10 @@ const GenerateCode = ({data}) => {
       return 0.5;
     }
     if(option==='Sorpresa 4'){
-      return 0.6;
+      return 0.2;
     }
     if(option==='Sorpresa 5'){
-      return 0.7;
+      return 0.1;
     }
     
     return 0.5;
@@ -146,7 +146,7 @@ const GenerateCode = ({data}) => {
     />  <h3 style={{ margin: '5px 0' }}>💵 Deposita en un OXXO:</h3>  <h1 style={{ margin: '5px 0', fontStyle: 'italic', color: '#4169E1' }}>
       ${formatFloat(totalDeposito)} </h1>
   </div>
-  <h4>a la cuenta: <strong style={{  color: '#4169E1' }}>4152-3144-0002-3704</strong>  BBVA Bancomer o en tu plantel  </h4>
+  <h4>a la cuenta: <strong style={{  color: '#4169E1' }}>{data.tarjetaBancomer}</strong>  BBVA Bancomer </h4>
   
   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
     <h3 style={{ marginBottom: '0px' }}>🔖 Folio de referencia:</h3>
@@ -160,8 +160,20 @@ const GenerateCode = ({data}) => {
   <h3 style={{ marginTop: '1px' }}>
     No olvides mostrar esta imagen para que te hagan el descuento respectivo.
   </h3>
+   <h3 style={{ marginTop: '1px' }}>
+    <p>   
+    Promoción válida solo para el curso de: <strong style={{ color: '#4169E1' }}>{data.category}</strong></p>
+    <p>
+    Promoción válida unicamente depositando en OXXO hasta el: <strong style={{ color: '#4169E1' }}>{formatDateSpanish(data.valido)}</strong>
+    </p>
+    <p>
+    Costo normal de INSCRIPCIÓN sin promoción: <strong style={{ color: '#4169E1' }}>${data.inscripcion}</strong>
+    </p>
+    
+    <p style={{ fontSize: '20px', fontWeight: 'bold', color: '#d32f2f' }}>No valido en pagos en el plantel</p>
+  </h3>
   <h3 style={{ marginTop: '1px' }}>
-    Si depositas en OXXO tomale una foto al TICKET y enviala al WhatsApp 496-127-6199
+    Si ya depositaste en OXXO tomale una foto al TICKET y enviala al WhatsApp <strong style={{ color: '#4169E1' }}>{data.telefonoEscuela}</strong>
   </h3>
 
   

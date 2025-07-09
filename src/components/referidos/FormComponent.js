@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DisplayComponent from './DisplayComponent';
 import './FormComponent.css';
+import rouletteImage from '../../assets/roulette.jpg'; // Adjust the path as needed
 
 const FormComponent = ({setSelectedOption, premioRef}) => {
   const [formData, setFormData] = useState({ nombre: '', cellular: '', address: '' });
@@ -48,7 +49,10 @@ const FormComponent = ({setSelectedOption, premioRef}) => {
   };
 
   return (
-    <div className="form-wrapper">
+    <div className="form-wrapper roulette-background"
+      style={{
+        backgroundImage: `url(${rouletteImage})`,
+      }}>
       <h2 className="form-title">Antes de GIRAR la ruleta de la suerte por favor brindanos la siguiente información:</h2> {/* <-- Add this line */}
       <form onSubmit={handleSubmit}>
         <table className="form-table">

@@ -16,7 +16,7 @@ const apiClient = axios.create({
 export const rootApi = async () => {
     try {
         console.error("Invoking API places:");
-        const response = await apiClient.get("/places/with-categories");
+        const response = await apiClient.get("/locations/all");
         console.error("Fetching places:", response.data);
         return response.data; // Returns { question: "your question", answer: "chatbot response" }
     } catch (error) {

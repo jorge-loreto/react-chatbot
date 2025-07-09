@@ -37,7 +37,7 @@ const PlaceCard = ({ place, curso, setCurso }) => {
 
     return (
         <div style={styles.card}>
-            <h2>{place.name}</h2>
+            <h2 style={styles.h2}>{place.name}</h2>
             <p><strong>Direccion:</strong> {place.address}</p>
             <p><strong>Telefono:</strong> {place.phone}</p>
 
@@ -77,22 +77,21 @@ const PlaceCard = ({ place, curso, setCurso }) => {
         </div>
     );
 }
-
 const styles = {
     card: {
         border: "1px solid #ddd",
         padding: "10px",
-        margin: "10px",
+        margin: "1px",
         borderRadius: "8px",
         boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.1)",
-        width: "300px", // Added width to make the card more consistent
+        width: "300px",
         backgroundColor: "#fff",
     },
     buttonContainer: {
         display: "flex",
-        flexDirection: "column", // This makes the buttons display vertically
-        gap: "10px", // Adds spacing between the buttons
-        marginTop: "10px", // Adds space above the buttons
+        flexDirection: "column",
+        gap: "10px",
+        marginTop: "10px",
     },
     button: {
         padding: "10px 20px",
@@ -102,10 +101,17 @@ const styles = {
         border: "none",
         borderRadius: "5px",
         cursor: "pointer",
-        transition: "background-color 0.3s ease",
+        transition: "backgroundColor 0.3s ease",
     },
     buttonHover: {
-        backgroundColor: "#0056b3", // Darker blue when hovered
+        backgroundColor: "#0056b3",
+    },
+    h2: {
+        marginTop: "0px",
+        marginBottom: "0px",
+        marginLeft: "0px",
+        marginRight: "0px",
+        padding: "0px 0px",
     },
 };
 
