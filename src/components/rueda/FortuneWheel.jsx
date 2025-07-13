@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { premioTranslation, formatDate } from "../utils/utils"; // Adjust the import path as necessary
 import { askRefer } from "../api/apiReferidos"; // Import API function
+import './RuedaSimple.css';
+
 
 const premios = [
   { texto: 'Sorpresa 1', color: '#F87171' },
@@ -37,6 +39,7 @@ function polarToCartesian(cx, cy, r, angleInDegrees) {
 
 
 
+
 export default function FortuneWheel({ place, curso, setSelectedOption, premioRef}) {
   const course = place?.categories[curso];
  
@@ -44,6 +47,9 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
   const [spinning, setSpinning] = useState(false);
   const [winner, setWinner] = useState('');
   const [showModal, setShowModal] = useState(false);
+
+  const [formData, setFormData] = useState({ nombre: '', cellular: '' });
+   const [errors, setErrors] = useState({});
 
   const handleBack = () => {
     setSelectedOption(444); // or whatever value triggers the previous menu
@@ -80,9 +86,32 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
       setShowModal(true);
     }, 6500);
   };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleChangeNumber = (e) => {
+    let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+  
+    if (value.length > 10) {
+      value = value.slice(0, 10); // Limit to 10 digits
+    }
+  
+    // Auto-format with hyphens
+    if (value.length > 6) {
+      value = `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6, 10)}`;
+    } else if (value.length > 3) {
+      value = `${value.slice(0, 3)}-${value.slice(3)}`;
+    }
+  
+    setFormData({ ...formData, [e.target.name]: value });
+  };
+
   if (!course) {
     return <div>Error: Curso no encontrado</div>;
   }
+
+
 
   return (
     <div>
@@ -215,31 +244,67 @@ export default function FortuneWheel({ place, curso, setSelectedOption, premioRe
           <p>Plantel : <span style={{ fontWeight: 'bold', fontSize: '1em', color: 'red' }}>{place.name}</span></p>
           
           <p>Horario : <span style={{ fontWeight: 'bold', fontSize: '.8em', color: 'blue' }}>{course.categoryDetails.horario}</span></p>
-              
+          
           <form onSubmit={(e) => {
+
+            if (!e.target.checkValidity()) {
+                e.preventDefault();
+                return; // Prevent submission if the form isn't valid
+            }
             e.preventDefault();
           
-            setShowModal(false);
-        
-            premioRef.current.premio = winner;
-            premioRef.current.fecha = new Date().toLocaleDateString('es-MX');
-            const hoy = new Date();
-            const manana = new Date(hoy);
-            manana.setDate(hoy.getDate() + 2);
-            premioRef.current.valido = manana.toLocaleDateString('es-MX');
-            premioRef.current.category = course.name;
-            premioRef.current.plantel = place.name;
-            premioRef.current.id = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-            premioRef.current.fechaInicio = course.categoryDetails.startDate;
-            premioRef.current.horario = course.categoryDetails.horario;
-            premioRef.current.inscripcion = course.categoryDetails.costoInscripcion;
-            premioRef.current.telefonoEscuela = place.phone;
-            premioRef.current.tarjetaBancomer = place.tarjetaBancomer;
-           
             
-            handleBack();
+
+            if (Object.keys(errors).length === 0) {
+              console.log('Form submitted:', formData);
+              setShowModal(false);
+        
+                premioRef.current.premio = winner;
+                premioRef.current.fecha = new Date().toLocaleDateString('es-MX');
+                const hoy = new Date();
+                const manana = new Date(hoy);
+                manana.setDate(hoy.getDate() + 2);
+                premioRef.current.valido = manana.toLocaleDateString('es-MX');
+                premioRef.current.category = course.name;
+                premioRef.current.plantel = place.name;
+                premioRef.current.id = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+                premioRef.current.fechaInicio = course.categoryDetails.startDate;
+                premioRef.current.horario = course.categoryDetails.horario;
+                premioRef.current.inscripcion = course.categoryDetails.costoInscripcion;
+                premioRef.current.telefonoEscuela = place.phone;
+                premioRef.current.tarjetaBancomer = place.tarjetaBancomer;
+                premioRef.current.nombre = formData.nombre;
+                premioRef.current.celular = formData.cellular;
+                premioRef.current.oxxo = place.oxxo;
+              
+                
+                handleBack();
+            } else {
+              // ❌ Display errors
+              console.log('Validation errors:', errors);
+            }
+
+
+
+            
           }}>
-             
+            <p className="error-highlight">COMPLETA ESTA INFORMACION PARA ASIGNARTE EL PREMIO.</p>
+             <table className="form-table">
+              <tbody>
+                <tr>
+                  <td><label htmlFor="nombre">Nombre:</label></td>
+                  <td><input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required /></td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="cellular">Numero Celular:</label></td>
+                  <td><input type="tel" id="cellular" name="cellular" pattern="\d{3}-\d{3}-\d{4}" placeholder="449-123-7890" 
+                  title="Por favor ingresa un número de celular de 10 digitos" value={formData.cellular} onChange={handleChangeNumber} required /></td>
+                </tr>
+                
+              </tbody>
+            </table>
+            {errors.celular && <span style={{ color: 'red' }}>{errors.celular}</span>}
+            {errors.premio && <span style={{ color: 'red' }}>{errors.premio}</span>}
             <button type="submit" style={styles.button}>Descargar premio</button>           
             <button type="button" onClick={() => setShowModal(false)} style={styles.button}>Cancelar</button>
           </form>

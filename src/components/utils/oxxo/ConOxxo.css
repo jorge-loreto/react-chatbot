@@ -1,0 +1,70 @@
+.oxxo-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px;
+  padding: 1px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.oxxo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.oxxo-logo {
+  width: 50px;
+  height: 26px;
+  margin: 5px 0;
+}
+
+.oxxo-title {
+  margin: 5px 0;
+}
+
+.oxxo-amount {
+  margin: 5px 0;
+  font-style: italic;
+  color: #4169E1;
+}
+
+.oxxo-account {
+  margin: 10px 0;
+}
+
+.oxxo-reference {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.oxxo-folio {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d32f2f;
+  margin: 0;
+}
+
+.oxxo-note {
+  margin-top: 10px;
+}
+
+.oxxo-promotion p {
+  margin: 4px 0;
+}
+
+.warning {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d32f2f;
+}
+
+.oxxo-contact {
+  margin-top: 15px;
+}
+
+.highlight {
+  color: #4169E1;
+}

@@ -19,9 +19,8 @@ const App = () => {
     const hasFetched = useRef(false); // Track first render
     const [curso, setCurso] = useState(777);
     const premioRef = useRef({
-        nombre: '',
-        direccion: '',
-        celular: '',
+        nombre: 'test',
+        celular: '123-456-7890',
         id : '',
         category: '',
         plantel: '',
@@ -33,6 +32,7 @@ const App = () => {
         inscripcion: 0,
         telefonoEscuela: '',
         tarjetaBancomer: '',
+        oxxo: '',
       });
 
      useEffect(() => {
@@ -125,7 +125,7 @@ const App = () => {
                     <button style={styles.button} onClick={() => {
                         /*setSelectedOption(888);
                         setCurso(777);*/
-                        setSelectedOption(1001);//llama a REFERIDO
+                        setSelectedOption(555);//llama a REFERIDO
                     }}>
                         🎁 ¡Gira y gana!
                     </button>

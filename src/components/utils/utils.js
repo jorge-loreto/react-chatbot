@@ -56,3 +56,11 @@ export const premioTranslation = (optionSelected) =>{
     
     return "50% en inscripcion";
 };
+/*
+export const formatFloat = (num) =>{
+    return parseFloat(num.toFixed(2)); 
+  };*/
+
+  export const formatFloat = (num) => {
+    return parseFloat(Number(num).toFixed(2));
+  };

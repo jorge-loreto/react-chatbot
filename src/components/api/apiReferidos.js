@@ -39,6 +39,7 @@ export const askRefer = async (referido) => {
             horario: referido.horario,
             inscripcion: referido.inscripcion,
             telefonoEscuela: referido.telefonoEscuela,
+            oxxo: referido.oxxo,
         };
         console.error("Invoking API referido :", referido);
         const response = await apiReferidos.post("/referidos/referido", { payload });

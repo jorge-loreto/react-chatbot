@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import logo from '../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
-import logoOxxo from '../../assets/Oxxo_Logo.svg.webp'; // Adjust the path to your logo image
 import TicketDetails from '../TICKET/CourseDetails';
 import { formatDateSpanish, premioTranslation } from "../utils/utils"; // Adjust the import path as necessary
 import { askRefer } from "../api/apiReferidos"; // Import API function
+import ConOxxo from './oxxo/ConOxxo';
+import SinOxxo from './oxxo/SinOxxo';
+import logo from '../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
 
 const GenerateCode = ({data}) => {
 
@@ -44,12 +45,6 @@ const GenerateCode = ({data}) => {
       hasRun.current = true; // Prevents re-execution
     }
   }, []);
-  
-
-  
-  function formatFloat(num) {
-    return parseFloat(num.toFixed(2)); 
-  }
   
 
   const generateRandomCode = () => {
@@ -137,47 +132,11 @@ const GenerateCode = ({data}) => {
   </div>
 
   <TicketDetails data={data} />
+  {data.oxxo === 'si' ? <ConOxxo data={data} totalDeposito={totalDeposito} /> 
+                    : <SinOxxo data={data} totalDeposito={totalDeposito}/>}
 
-  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-    <img
-      src={logoOxxo}
-      alt="OXXO Logo"
-      style={{ width: '50px', height: '26px', margin: '5px 0' }}
-    />  <h3 style={{ margin: '5px 0' }}>💵 Deposita en un OXXO:</h3>  <h1 style={{ margin: '5px 0', fontStyle: 'italic', color: '#4169E1' }}>
-      ${formatFloat(totalDeposito)} </h1>
+  
   </div>
-  <h4>a la cuenta: <strong style={{  color: '#4169E1' }}>{data.tarjetaBancomer}</strong>  BBVA Bancomer </h4>
-  
-  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-    <h3 style={{ marginBottom: '0px' }}>🔖 Folio de referencia:</h3>
-    <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#d32f2f' }}>
-      <strong>{data.id}</strong>
-    </h3>
-  </div>
-
-  
-
-  <h3 style={{ marginTop: '1px' }}>
-    No olvides mostrar esta imagen para que te hagan el descuento respectivo.
-  </h3>
-   <h3 style={{ marginTop: '1px' }}>
-    <p>   
-    Promoción válida solo para el curso de: <strong style={{ color: '#4169E1' }}>{data.category}</strong></p>
-    <p>
-    Promoción válida unicamente depositando en OXXO hasta el: <strong style={{ color: '#4169E1' }}>{formatDateSpanish(data.valido)}</strong>
-    </p>
-    <p>
-    Costo normal de INSCRIPCIÓN sin promoción: <strong style={{ color: '#4169E1' }}>${data.inscripcion}</strong>
-    </p>
-    
-    <p style={{ fontSize: '20px', fontWeight: 'bold', color: '#d32f2f' }}>No valido en pagos en el plantel</p>
-  </h3>
-  <h3 style={{ marginTop: '1px' }}>
-    Si ya depositaste en OXXO tomale una foto al TICKET y enviala al WhatsApp <strong style={{ color: '#4169E1' }}>{data.telefonoEscuela}</strong>
-  </h3>
-
-  
-</div>
 <button
     onClick={generateRandomCode}
     style={{
