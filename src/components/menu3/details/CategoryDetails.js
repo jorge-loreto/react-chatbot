@@ -7,7 +7,7 @@ const CategoryDetails = ({ categoryDetails }) => {
     <div className="category-details-card">
       
         <p><strong>Fecha de Inicio:</strong> </p>
-        <h3 style={{ display: categoryDetails.admision ? 'none' : 'flex' }}>
+        <h3>
           
           {formatDate(categoryDetails.startDate)}
         </h3>
