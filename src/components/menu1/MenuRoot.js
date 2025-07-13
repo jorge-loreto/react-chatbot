@@ -113,7 +113,7 @@ const App = () => {
                         Menu Anterior
                     </button>
 
-                    <MenuRoot3 place={menuOptions[plantelSelected]} curso={curso}></MenuRoot3>
+                    <MenuRoot3 place={menuOptions[plantelSelected]} curso={curso} setSelectedOption={setSelectedOption} ></MenuRoot3>
                     
                     <button style={styles.button3} onClick={() => {
                         /*setSelectedOption(888);

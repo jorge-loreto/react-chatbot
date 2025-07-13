@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import CategoryDetails from "./details/CategoryDetails";
 
-const CursoCard = ({ place, curso }) => {
+const CursoCard = ({ place, curso, setSelectedOption }) => {
     // Validación para evitar errores si no hay datos
     const course = place?.categories[curso];
     let courseImage;
@@ -33,6 +33,7 @@ const CursoCard = ({ place, curso }) => {
             <p style={styles.info}>
                 <strong>Teléfono:</strong> {place.phone}
             </p>
+            
 
             {/* Información del curso */}
             <div style={styles.courseContainer}>
@@ -43,6 +44,13 @@ const CursoCard = ({ place, curso }) => {
                     style={styles.image}
                 />
             </div>
+            <button style={styles.button} onClick={() => {
+                        /*setSelectedOption(888);
+                        setCurso(777);*/
+                        setSelectedOption(555);//llama a REFERIDO
+                    }}>
+                🎁 ¡Gira y gana grandes descuentos!
+            </button>
             <CategoryDetails categoryDetails={course.categoryDetails} />
         </div>
     );
@@ -102,6 +110,16 @@ const styles = {
         marginLeft: "0px",
         marginRight: "0px",
         padding: "0px 0px",
+    },
+    button: {
+        margin: "10px",
+        padding: "10px 5px",
+        fontSize: "16px",
+        cursor: "pointer",
+        borderRadius: "5px",
+        border: "1px solid black",
+        backgroundColor: "#007bff",
+        color: "#fff"
     },
 };
 
