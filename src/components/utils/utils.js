@@ -1,23 +1,33 @@
 // utils.js
 export const formatDate = (dateString) => {
+  const monthsInSpanish = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
 
-    const monthsInSpanish = [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-      ];
-      
-    console.log(monthsInSpanish); // Outputs the array of months in Spanish
-
-    console.log('formatDate: {}', dateString); // "Sat May 17 2025"
-    console.log('formatDate: {}', dateString); // "2025-05-17T00:00:00Z"
+  try {
+    // Asegurarse que la fecha tiene el formato ISO 'YYYY-MM-DD' o similar
     const [year, month, day] = dateString.split('-');
-    console.log('' + year + '-' + month + '-' + day); // "Sat May 17 2025"
-    const formattedDate = day+' de '+monthsInSpanish[month-1]+' de ' + year
-    console.log(day+' de '+monthsInSpanish[month-1]+' de ' + year  ); // "Sat May 17 2025"
-    console.log('fomratted dayte: ', formattedDate); // "Sat May 17 2025"
-    return formattedDate;
 
+    // Validar que todos los componentes existan y sean numéricos
+    if (
+      year?.length === 4 &&
+      !isNaN(parseInt(month)) &&
+      !isNaN(parseInt(day)) &&
+      parseInt(month) >= 1 && parseInt(month) <= 12
+    ) {
+      const formattedDate = `${parseInt(day)} de ${monthsInSpanish[parseInt(month) - 1]} de ${year}`;
+      return formattedDate;
+    } else {
+      // Si falla la validación, devolver el valor original
+      return dateString;
+    }
+  } catch (error) {
+    // Si ocurre cualquier error inesperado, también devolver el valor original
+    return dateString;
+  }
 };
+
 
 export const formatDateSpanish = (dateString) => {//
   // Split the input into day, month, and year

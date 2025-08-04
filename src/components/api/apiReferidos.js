@@ -41,9 +41,9 @@ export const askRefer = async (referido) => {
             telefonoEscuela: referido.telefonoEscuela,
             oxxo: referido.oxxo,
         };
-        console.error("Invoking API referido :", referido);
+        console.log("Invoking API referido :", referido);
         const response = await apiReferidos.post("/referidos/referido", { payload });
-        console.error("Fetching answer:", response.data);
+        console.log("Fetching answer:", response.data);
         return response.data; // Returns { question: "your question", answer: "chatbot response" }
     } catch (error) {
         console.error("Error fetching answer:", error);
