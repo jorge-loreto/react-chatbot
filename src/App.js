@@ -1,34 +1,14 @@
-import logoIteci from './assets/iteci-logo.jpeg';
-import './App.css';
-import './components/Chat'
-import MenuRoot from "./components/menu1/MenuRoot";
-import Header from "./components/header/Header";
-import React, { useState } from 'react';
+import { Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage/MainPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
-
-function App() {
-
-    console.log("Current Environment iTECi:", process.env.NODE_ENV);
-    return (
-
-      <div className="chat-wrapper">
-        <h2>BIENVENIDO A GRUPO ITECI</h2>
-        <Header></Header>
-
-
-          <MenuRoot />
-          {/* ApiComponent for making API calls */}
-          {/*
-          <ChatResponse text={textData} onApiResponse={setApiResponse} />
-          */}
-      </div>
-  );
-}
-function Header2() {
+const App = () => {
   return (
-      <header className="App-header">
-         <img src={logoIteci} className="App-logo" alt="logo" />
-      </header>
-  )
-}
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/admin" element={<AdminPage />} />
+    </Routes>
+  );
+};
+
 export default App;

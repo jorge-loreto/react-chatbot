@@ -13,11 +13,11 @@ const CursoCard = ({ place, curso, setSelectedOption }) => {
     // Obtener la imagen dinámicamente
     try {
         console.log("Imagen trying:", course.image);
-        courseImage = require(`../../assets/${course.image}`);
+        courseImage = require(`../../../../assets/${course.image}`);
         console.log("Imagen encontrada:", courseImage);
     } catch (err) {
         console.error("Imagen no encontrada, usando imagen de respaldo:", err);
-        courseImage = require(`../../assets/iteci-logo.jpeg`); // Imagen de respaldo
+        courseImage = require(`../../../../assets/iteci-logo.jpeg`); // Imagen de respaldo
     }
 
 

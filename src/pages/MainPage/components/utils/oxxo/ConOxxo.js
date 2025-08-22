@@ -1,6 +1,6 @@
 import React from 'react';
 import './ConOxxo.css';
-import logoOxxo from '../../../assets/Oxxo_Logo.svg.webp'; // Adjust the path to your logo image
+import logoOxxo from '../../../../../assets/Oxxo_Logo.svg.webp'; // Adjust the path to your logo image
 import { formatDateSpanish, formatFloat } from "../utils"; // Adjust the import path as necessary
 
 const ConOxxo = ({ data, totalDeposito }) => {

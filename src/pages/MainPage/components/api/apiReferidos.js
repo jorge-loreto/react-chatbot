@@ -1,19 +1,6 @@
-//const API_BASE_URL = "http://localhost:5000";
-//const API_BASE_URL = "http://192.168.1.121:5000";
-//const API_BASE_URL = "https://34.51.36.4:5000";
-//const API_BASE_URL ="https://my-iteci-app-1095159323845.us-central1.run.app"
-import axios from "axios";
 import { premioTranslation } from "../utils/utils"; // Adjust the import path as necessary
+import apiCliente from "./apiCliente";
 
-const API_BASE_URL =process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
-
-const apiReferidos = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        "Content-Type": "application/json",
-    },
-    withCredentials: true
-});
 
 const obtenerFechaActual = () => {
     const fecha = new Date();
@@ -42,7 +29,7 @@ export const askRefer = async (referido) => {
             oxxo: referido.oxxo,
         };
         console.log("Invoking API referido :", referido);
-        const response = await apiReferidos.post("/referidos/referido", { payload });
+        const response = await apiCliente.post("/referidos/referido", { payload });
         console.log("Fetching answer:", response.data);
         return response.data; // Returns { question: "your question", answer: "chatbot response" }
     } catch (error) {
@@ -50,5 +37,3 @@ export const askRefer = async (referido) => {
         throw error;
     }
 };
-
-export default apiReferidos;

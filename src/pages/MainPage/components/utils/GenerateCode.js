@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import TicketDetails from '../TICKET/CourseDetails';
-import { formatDateSpanish, premioTranslation } from "../utils/utils"; // Adjust the import path as necessary
+import { formatDateSpanish, premioTranslation } from "./utils"; // Adjust the import path as necessary
 import { askRefer } from "../api/apiReferidos"; // Import API function
 import ConOxxo from './oxxo/ConOxxo';
 import SinOxxo from './oxxo/SinOxxo';
-import logo from '../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
+import logo from '../../../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
 
 const GenerateCode = ({data}) => {
 

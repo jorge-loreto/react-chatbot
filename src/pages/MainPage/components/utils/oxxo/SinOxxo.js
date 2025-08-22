@@ -1,7 +1,7 @@
 import React from 'react';
 import './ConOxxo.css';
 import { formatDateSpanish, formatFloat } from "../utils"; // Adjust the import path as necessary
-import logo from '../../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
+import logo from '../../../../../assets/iteci-logo.jpeg'; // Adjust the path to your logo image
 
 const SinOxxo = ({ data, totalDeposito }) => {
   return (

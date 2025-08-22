@@ -7,6 +7,7 @@ import FortuneWheel from '../rueda/FortuneWheel';
 import GenerateCode from "../utils/GenerateCode";
 import FormComponent from "../referidos/FormComponent";
 import CampusSelector from "../campusSelector/CampusSelector";
+import CategoryIcons from "../loader/CategoryIcons";
 
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
     const [curso, setCurso] = useState(777);
     const premioRef = useRef({
         nombre: 'test',
-        celular: '123-456-7890',
+        celular: '496-123-7890',
         id : '',
         category: '',
         plantel: '',
@@ -76,7 +77,11 @@ const App = () => {
             {selectedOption === 999 ? (
                 <div style={styles.menu}>
                     {loading ? (
-                        <p>Loading...</p>
+                        <div>
+                            <p>Loading...</p>
+                            <h2>Programas disponibles</h2>
+                            <CategoryIcons />
+                        </div>
                     ) : (
                         <CampusSelector 
                             menuOptions={menuOptions} 

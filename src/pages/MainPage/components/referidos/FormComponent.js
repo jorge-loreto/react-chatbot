@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DisplayComponent from './DisplayComponent';
 import './FormComponent.css';
-import rouletteImage from '../../assets/roulette.jpg'; // Adjust the path as needed
+import rouletteImage from '../../../../assets/roulette.jpg'; // Adjust the path as needed
 
 const FormComponent = ({setSelectedOption, premioRef}) => {
   const [formData, setFormData] = useState({ nombre: '', cellular: '', address: '' });

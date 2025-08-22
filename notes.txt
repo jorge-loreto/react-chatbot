@@ -1,0 +1,67 @@
+us-central1-docker.pkg.dev/iteci-c8bd4/react-iteci
+us-central1-docker.pkg.dev/iteci-c8bd4/react-iteci
+us-central1-docker.pkg.dev/iteci-c8bd4/react-iteci
+
+1
+------------
+
+docker build -t us-central1-docker.pkg.dev/iteci-c8bd4/react-iteci/my-iteci-react --build-arg REACT_ENV=staging .
+
+	production
+
+2
+---------------
+--------------------
+docker push us-central1-docker.pkg.dev/iteci-c8bd4/react-iteci/my-iteci-react
+
+4
+---------------------------
+gcloud run deploy my-react --image=us-central1-docker.pkg.dev/iteci-c8bd4/react-iteci/my-iteci-react --platform=managed --region=us-central1 --allow-unauthenticated --project=iteci-c8bd4
+
+gcloud run deploy my-react --image=us-central1-docker.pkg.dev/iteci-c8bd4/my-iteci-app/my-react-app 
+  --region=us-central1 \
+  --platform=managed \
+  --allow-unauthenticated
+  
+
+gcloud run services list --platform managed --region us-central1
+
+
+
+----------------------------------
+STAGING JAVA BACKEND ---- us-central1-docker.pkg.dev/iteci-c8bd4/java-backend-staging
+----------------------------------
+1
+------------
+docker build -t us-central1-docker.pkg.dev/iteci-c8bd4/java-backend-staging/my-java-backend-staging .
+2
+---------------
+--------------------
+
+docker push us-central1-docker.pkg.dev/iteci-c8bd4/java-backend-staging/my-java-backend-staging
+4
+---------------------------
+gcloud run deploy my-java-backend-staging --image=us-central1-docker.pkg.dev/iteci-c8bd4/java-backend-staging/my-java-backend-staging --platform=managed --region=us-central1 --allow-unauthenticated --project=iteci-c8bd4
+
+
+Service [my-java-backend-staging] revision [my-java-backend-staging-00001-md6] has been deployed and is serving 100 percent of traffic.
+Service URL: https://my-java-backend-staging-1095159323845.us-central1.run.app
+
+
+
+
+
+
+
+docker push us-central1-docker.pkg.dev/iteci-c8bd4/java-backend-staging/my-java-backend-staging
+
+gcloud run deploy my-react --image=us-central1-docker.pkg.dev/iteci-c8bd4/my-iteci-app/my-react-app 
+  --region=us-central1 \
+  --platform=managed \
+  --allow-unauthenticated
+  
+
+gcloud run services list --platform managed --region us-central1
+
+
+curl -i -X OPTIONS -H "Origin: https://my-react-1095159323845.us-central1.run.app" -H "Access-Control-Request-Method: GET" https://my-java-backend-staging-1095159323845.us-central1.run.app/locations/all
