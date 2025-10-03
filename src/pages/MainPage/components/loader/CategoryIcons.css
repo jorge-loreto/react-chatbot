@@ -1,0 +1,38 @@
+.blink-img {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.img1 {
+  animation-name: fadeInOut1;
+}
+
+.img2 {
+  animation-name: fadeInOut2;
+}
+
+@keyframes fadeInOut1 {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes fadeInOut2 {
+  0%, 49% { opacity: 0; }
+  50%, 100% { opacity: 1; }
+}
+
+.loading-text {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  animation: colorCycle 1.5s infinite linear; /* 1.5s = 3 steps x 500ms */
+}
+
+@keyframes colorCycle {
+  0%   { color: red; }
+  33%  { color: blue; }
+  66%  { color: green; }
+  100% { color: red; }
+}
+

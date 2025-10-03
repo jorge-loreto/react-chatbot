@@ -4,6 +4,7 @@ import estilismoIcon from '../../../../assets/icon-estilismo.jpg';
 import nurseIcon from '../../../../assets/icon-nurse.jpg';
 import prepaIcon from '../../../../assets/icon-prepa.jpg';
 import iteciIcon from '../../../../assets/iteci.png';
+import inglesIcon from '../../../../assets/iconEnglish.png';
 
 const PlaceCard = ({ place, curso, setCurso }) => {
 
@@ -22,7 +23,8 @@ const PlaceCard = ({ place, curso, setCurso }) => {
         estilismo: estilismoIcon,
         enfermeria: nurseIcon,
         prepa: prepaIcon,
-        iteci: iteciIcon
+        iteci: iteciIcon,
+        ingles:inglesIcon,
     };
       
       const getStartDateMessage = (startDate, admision) => {

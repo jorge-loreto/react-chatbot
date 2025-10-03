@@ -78,8 +78,7 @@ const App = () => {
                 <div style={styles.menu}>
                     {loading ? (
                         <div>
-                            <p>Loading...</p>
-                            <h2>Programas disponibles</h2>
+                           
                             <CategoryIcons />
                         </div>
                     ) : (
