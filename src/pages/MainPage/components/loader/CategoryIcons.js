@@ -6,8 +6,12 @@ import prepaIcon from '../../../../assets/icon-prepa.jpg';
 import cargandoIcon from '../../../../assets/loading.jpg';
 import cargandoIcon2 from '../../../../assets/loading2.jpg';
 import iteciIcon from '../../../../assets/iconIteci.png';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './CategoryIcons.css'; // Import the CSS file for styling
 const CategoryIcons = () => {
+  const [counter, setCounter] = useState(5);
+  const navigate = useNavigate();
   const icons = [
     { src: barberIcon, alt: 'Barbería' },
     { src: estilismoIcon, alt: 'Estilismo' },
@@ -67,6 +71,7 @@ const CategoryIcons = () => {
               borderRadius: '8px',
               boxShadow: '0 2px 6px rgba(0,0,0,0.2)'
             }}
+            onClick={() => setCounter(counter - 1)}  // ✅ use the setter
           />
         ))}
 
@@ -92,6 +97,12 @@ const CategoryIcons = () => {
         />
        
       </div>
+       {/* ApiComponent for making API calls */}
+          {/*
+          <ChatResponse text={textData} onApiResponse={setApiResponse} />
+          */}
+          <button className='admin-button' style={{display: counter>0 ? 'none' : 'block'}}
+          onClick={() => navigate("/admin")}>Go to Admin</button>
     </div>
   );
 };

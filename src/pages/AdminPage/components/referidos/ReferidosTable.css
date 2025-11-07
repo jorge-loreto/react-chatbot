@@ -1,0 +1,39 @@
+/* ReferidosTable.css */
+
+.table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.table-container thead {
+  background-color: #e5e7eb; /* header gray */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-container tbody tr:nth-child(even) td {
+  background-color: #f9fafb; /* light gray */
+}
+
+.table-container tbody tr:nth-child(odd) td {
+  background-color: #ffffff; /* white */
+}
+
+.table-container tbody tr:hover td {
+  background-color: #f3f4f6;
+}
