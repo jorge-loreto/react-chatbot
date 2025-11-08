@@ -11,18 +11,22 @@ const BusinessTable = ({ businesses }) => {
           <th style={th}>ID</th>
           <th style={th}>Nombre</th>
           <th style={th}>Teléfono</th>
-          <th style={th}>Correo</th>
-          <th style={th}>Dirección</th>
+          <th style={th}>Creacion</th>
+          <th style={th}>CAtegorias</th>
         </tr>
       </thead>
       <tbody>
         {businesses.map((biz) => (
           <tr key={biz.id}>
             <td style={td}>{biz.id}</td>
-            <td style={td}>{biz.name}</td>
-            <td style={td}>{biz.phone}</td>
-            <td style={td}>{biz.email}</td>
-            <td style={td}>{biz.address}</td>
+            <td style={td}>{biz.nombre}</td>
+            <td style={td}>{biz.celular}</td>
+            <td style={td}>{biz.creationDate}</td>
+            <td style={td}>
+                 {biz.locationIds && biz.locationIds.length > 0
+        ? biz.locationIds.join(", ")
+        : <em style={{ color: "gray" }}>No locations</em>}
+            </td>
           </tr>
         ))}
       </tbody>
