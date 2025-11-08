@@ -5,12 +5,15 @@ import ReferidosContactados from "./components/referidos/ReferidosContactados";
 import ReferidosAlumnos from "./components/referidos/ReferidosAlumnos";
 import ReferidosEliminados from "./components/referidos/ReferidosEliminados";
 import Status from "./constants/statusEnum";
+import { useNavigate } from "react-router-dom";
+import { useAdmin } from "../../context/AdminContext";
+
 
 const AdminPage = () => {
-  const [user, setUser] = useState("");
-  const [pass, setPass] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(Status.NEW);
+  const navigate = useNavigate();
+  const { user, pass, setUser, setPass, isAuthenticated, setIsAuthenticated, logout } = useAdmin();
+
 
   const handleLogin = () => {
     if (user.trim() === "" || pass.trim() === "") {
@@ -113,16 +116,36 @@ const AdminPage = () => {
       {/* 🧩 Render selected section */}
       {renderContent()}
 
-      <button
-        onClick={() => {
-          setIsAuthenticated(false);
-          setUser("");
-          setPass("");
+      {/* Footer buttons */}
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          justifyContent: "center",
+          gap: "10px",
         }}
-        style={{ marginTop: "20px" }}
       >
-        Logout
-      </button>
+        <button
+          onClick={() => navigate("/business-admin")}
+          style={{ backgroundColor: "#28a745", color: "white", padding: "8px 16px" }}
+        >
+          Admin Business Clients
+        </button>
+
+        <button
+          onClick={logout}
+          style={{ backgroundColor: "#dc3545", color: "white", padding: "8px 16px" }}
+        >
+          Logout
+        </button>
+        <button
+          onClick={() =>{ logout(); navigate("/");
+          } }
+          style={{ marginTop: "20px", backgroundColor: "#007bff", color: "white", padding: "8px 16px" }}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
