@@ -1,7 +1,7 @@
 // src/components/business/BusinessTable.jsx
 import React from "react";
 
-const BusinessTable = ({ businesses }) => {
+const BusinessTable = ({ businesses, onEdit }) => {
   if (!businesses.length) return <p>No businesses found.</p>;
 
   return (
@@ -12,7 +12,9 @@ const BusinessTable = ({ businesses }) => {
           <th style={th}>Nombre</th>
           <th style={th}>Teléfono</th>
           <th style={th}>Creacion</th>
-          <th style={th}>CAtegorias</th>
+          <th style={th}>Localidades</th>
+          <th style={th}>Notas</th>
+          <th style={th}>Editar</th>
         </tr>
       </thead>
       <tbody>
@@ -23,9 +25,18 @@ const BusinessTable = ({ businesses }) => {
             <td style={td}>{biz.celular}</td>
             <td style={td}>{biz.creationDate}</td>
             <td style={td}>
-                 {biz.locationIds && biz.locationIds.length > 0
-        ? biz.locationIds.join(", ")
-        : <em style={{ color: "gray" }}>No locations</em>}
+              {biz.locationIds && biz.locationIds.length > 0
+                ? biz.locationIds.join(", ")
+                : <em style={{ color: "gray" }}>No locations</em>}
+            </td>
+            <td style={td}>{biz.notas}</td>
+            <td style={td}>
+              <button
+                onClick={() => onEdit && onEdit(biz)}
+                style={{ padding: "6px 12px", cursor: "pointer", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "4px" }}
+              >
+                Editar
+              </button>
             </td>
           </tr>
         ))}

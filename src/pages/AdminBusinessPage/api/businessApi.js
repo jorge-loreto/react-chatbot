@@ -10,3 +10,14 @@ export const saveBusiness = async (businessData) => {
     throw error;
   }
 };
+// 🆕 UPDATE (EDIT) BUSINESS
+export const updateBusiness = async (id, businessData) => {
+  try {
+    const response = await apiCliente.put(`/business/${id}`, businessData);
+    console.log("Business updated:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating business:", error);
+    throw error;
+  }
+};
