@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdmin } from "../../context/AdminContext";
 import { getBusiness } from "./api/apiBusiness";
-import { saveBusiness } from "./api/businessApi"; // 🆕 added
+import { saveBusiness, updateBusiness } from "./api/businessApi";
 import BusinessTable from "./components/BusinessTable";
+import LocationForm from "./components/LocationForm";
 
 const AdminBusinessPage = () => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const AdminBusinessPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false); // 🆕 control create form
+  const [editingBusinessId, setEditingBusinessId] = useState(null);
+  const [showLocationForm, setShowLocationForm] = useState(false);
   const [newBusiness, setNewBusiness] = useState({
     nombre: "",
     celular: "",
@@ -46,20 +49,40 @@ const AdminBusinessPage = () => {
     }));
   };
 
-  // 🆕 Save new business
   const handleSaveBusiness = async (e) => {
     e.preventDefault();
+
     try {
-      await saveBusiness(newBusiness);
-      alert("✅ Business saved successfully!");
+      if (editingBusinessId) {
+        await updateBusiness(editingBusinessId, newBusiness);
+        alert("✅ Business updated successfully!");
+      } else {
+        await saveBusiness(newBusiness);
+        alert("✅ Business saved successfully!");
+      }
+
       setShowForm(false);
+      setEditingBusinessId(null);
       setNewBusiness({ nombre: "", celular: "", notas: "", locationIds: [] });
-      fetchBusiness(); // refresh table
+      fetchBusiness();
     } catch (error) {
       console.error("Error saving business:", error);
       alert("❌ Error saving business");
     }
   };
+
+
+  const handleEdit = (id, business) => {
+    setNewBusiness({
+      nombre: business.nombre,
+      celular: business.celular,
+      notas: business.notas,
+      locationIds: business.locationIds || [],
+    });
+    setEditingBusinessId(id);
+    setShowForm(true);
+  };
+
 
   // 🔒 redirect if not authenticated
   if (!isAuthenticated) {
@@ -170,6 +193,27 @@ const AdminBusinessPage = () => {
             style={{ width: "100%", marginBottom: "15px" }}
           />
 
+          {editingBusinessId && (
+            <>
+              <button
+                type="button"
+                onClick={() => setShowLocationForm(true)}>
+                + Add Location
+              </button>
+              {showLocationForm && (
+                <LocationForm
+                  businessId={editingBusinessId}
+                  onCancel={() => setShowLocationForm(false)}
+                  onSuccess={() => {
+                    setShowLocationForm(false);     // hide form
+                    fetchBusiness();            // refresh data
+                    setShowForm(false);
+                  }}
+                />
+              )}
+            </>
+          )}
+
           <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
             <button
               type="submit"
@@ -180,27 +224,29 @@ const AdminBusinessPage = () => {
                 borderRadius: "6px",
               }}
             >
-              Guardar
+              {editingBusinessId ? "Actualizar" : "Guardar"}
             </button>
             <button
               type="button"
-              onClick={() => setShowForm(false)}
-              style={{
-                backgroundColor: "#6c757d",
-                color: "white",
-                padding: "8px 16px",
-                borderRadius: "6px",
+              onClick={() => {
+                setShowForm(false);
+                setEditingBusinessId(null);
+                setNewBusiness({ nombre: "", celular: "", notas: "", locationIds: [] });
               }}
             >
               Cancelar
             </button>
+
           </div>
         </form>
       )}
 
       {/* 🧩 Table with all business records */}
       <div style={{ marginTop: "20px" }}>
-        <BusinessTable businesses={businesses} />
+        <BusinessTable
+          businesses={businesses}
+          onEdit={handleEdit}
+        />
       </div>
 
       {/* Footer buttons */}
