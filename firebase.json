@@ -1,9 +1,14 @@
 {
   "hosting": {
     "public": "build",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "site": "iteci-c8bd4"
   },
-    "firestore": {
-      "indexes": "firestore.indexes.json"
-    }
+  "firestore": {
+    "indexes": "firestore.indexes.json"
+  }
 }

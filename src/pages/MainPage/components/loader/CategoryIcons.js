@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import barberIcon from '../../../../assets/icon-barbershop.jpg';
 import estilismoIcon from '../../../../assets/icon-estilismo.jpg';
 import nurseIcon from '../../../../assets/icon-nurse.jpg';
@@ -6,18 +6,52 @@ import prepaIcon from '../../../../assets/icon-prepa.jpg';
 import cargandoIcon from '../../../../assets/loading.jpg';
 import cargandoIcon2 from '../../../../assets/loading2.jpg';
 import iteciIcon from '../../../../assets/iconIteci.png';
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './CategoryIcons.css'; // Import the CSS file for styling
+import './CategoryIcons.css';
+
 const CategoryIcons = () => {
   const [counter, setCounter] = useState(5);
+  const [showContent, setShowContent] = useState(false); // controla delay
   const navigate = useNavigate();
+
   const icons = [
     { src: barberIcon, alt: 'Barbería' },
     { src: estilismoIcon, alt: 'Estilismo' },
     { src: nurseIcon, alt: 'Enfermería' },
     { src: prepaIcon, alt: 'Preparatoria' }
   ];
+
+  // Delay de 3 segundos al cargar el componente
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 3000);
+
+    return () => clearTimeout(timer); // limpia timer
+  }, []);
+
+  // Mientras pasan los 3 segundos
+  if (!showContent) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh"
+        }}
+      >
+        <img
+          src={cargandoIcon}
+          alt="Cargando..."
+          className="blink-img img1"
+          style={{ width: "150px" }}
+        />
+        <p className="loading-text">CARGANDO...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -46,7 +80,6 @@ const CategoryIcons = () => {
           className="blink-img img2"
           style={{ position: 'absolute' }}
         />
-       
       </div>
 
       {/* Category icons */}
@@ -69,15 +102,17 @@ const CategoryIcons = () => {
               height: '80px',
               objectFit: 'cover',
               borderRadius: '8px',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.2)'
+              boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+              cursor: 'pointer'
             }}
-            onClick={() => setCounter(counter - 1)}  // ✅ use the setter
+            onClick={() => setCounter(prev => prev - 1)}
           />
         ))}
-
       </div>
+
       <p className="loading-text">CARGANDO...</p>
       <h2 className="loading-text">Programas disponibles</h2>
+
       <div
         id="loading-icon"
         style={{
@@ -95,14 +130,15 @@ const CategoryIcons = () => {
           alt="iteci"
           style={{ position: 'absolute' }}
         />
-       
       </div>
-       {/* ApiComponent for making API calls */}
-          {/*
-          <ChatResponse text={textData} onApiResponse={setApiResponse} />
-          */}
-          <button className='admin-button' style={{display: counter>0 ? 'none' : 'block'}}
-          onClick={() => navigate("/admin")}>Go to Admin</button>
+
+      <button
+        className='admin-button'
+        style={{ display: counter > 0 ? 'none' : 'block' }}
+        onClick={() => navigate("/admin")}
+      >
+        Go to Admin
+      </button>
     </div>
   );
 };
